@@ -43,9 +43,7 @@ class DetailView(MethodView):
 			post.save()
 
 			return redirect(url_for('posts.detail', slug=slug)
-
 		return render_template('posts/detail.html', **context)
 
-#my urls
 posts.add_url_rule('/', view_func=ListView.as_view('list'))
 posts.add_url_rule('/<slug>/', view_func=DetailView.as_view('detail'))
