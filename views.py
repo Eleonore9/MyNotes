@@ -2,9 +2,9 @@ from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 from tumblelog.models import Post, Comment
 from flask.ext.mongoengine.wtf import model_form
-
+print 'views 1'
 posts = Blueprint('posts', __name__, template_folder='templates')
-
+print 'views 2'
 
 class ListView(MethodView):
 
@@ -17,12 +17,12 @@ class DetailView(MethodView):
 	form = model_form(Comment, exclude=['created_at'])
 
 	def get_context(self, slug):
-		post =Post.objects.get_or_404(slug=slug)
+		post = Post.objects.get_or_404(slug=slug)
 		form = self.form(request.form)
 
 		context = {
-				"post": post,
-				"form": form
+			"post": post,
+			"form": form
 		}
 		return context
 
@@ -44,6 +44,6 @@ class DetailView(MethodView):
 
 			return redirect(url_for('posts.detail', slug=slug)
 		return render_template('posts/detail.html', **context)
-
+print 'views 3'
 posts.add_url_rule('/', view_func=ListView.as_view('list'))
 posts.add_url_rule('/<slug>/', view_func=DetailView.as_view('detail'))
