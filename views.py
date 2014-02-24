@@ -27,7 +27,7 @@ class DetailView(MethodView):
 
 	def get(self, slug):
 		context = self.get_context(slug)
-		return render_template('posts/detail.html', post=post)
+		return render_template('posts/detail.html', **context)
 
 	def post(self, slug):
 		context = self.get_context(slug)
